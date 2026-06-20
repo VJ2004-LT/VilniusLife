@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@theme {
+  --color-primary: #E65A40;
+  --color-secondary: #E1773D;
+  --color-accent: #E69440;
+}
+
+.leaflet-control-zoom {
+  margin-top: 6px !important;
+}
+
+.leaflet-control-zoom a {
+  height: 33px !important;
+  line-height: 33px !important;
+}
+
+.panel {
+  @apply bg-white rounded-lg z-[1000] shadow-lg border border-black/40;
+}
+
+@layer base {
+  .leaflet-interactive:focus {
+    outline: none;
+  }
+}

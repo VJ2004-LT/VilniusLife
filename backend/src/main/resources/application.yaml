@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: vilniuslife
+  datasource:
+    url: jdbc:postgresql://db:5432/appdb
+    username: appuser
+    password: apppassword
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+frontend:
+  url: ${FRONTEND_URL}
