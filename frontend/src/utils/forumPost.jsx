@@ -1,13 +1,12 @@
 const BACKEND_URL = import.meta.env.VITE_API_URL;
 
-export async function makeForumPost(userId, title, content, coordsLat, coordsLng) {
+export async function makeForumPost(title, content, coordsLat, coordsLng) {
   try {
     const res = await fetch(`${BACKEND_URL}/forumPost`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userId,
         title,
         content,
         coordsLat,

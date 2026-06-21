@@ -1,13 +1,12 @@
 const BACKEND_URL = import.meta.env.VITE_API_URL;
 
-export async function makeForumComment(userId, forumPostId, content,) {
+export async function makeForumComment(forumPostId, content,) {
   try {
     const res = await fetch(`${BACKEND_URL}/forumComment`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userId,
         forumPostId,
         content,
       }),

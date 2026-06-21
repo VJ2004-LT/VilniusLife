@@ -3,8 +3,6 @@ package com.vl.vilniuslife.model;
 
 public class ForumPostRequest {
 
-    private Integer userId;
-
     private String content;
 
     private String title;
@@ -13,20 +11,11 @@ public class ForumPostRequest {
 
     private double coordsLat;
 
-    public ForumPostRequest(Integer userId, String content, String title, double coordsLng, double coordsLat) {
-        this.userId = userId;
+    public ForumPostRequest(String content, String title, double coordsLng, double coordsLat) {
         this.content = content;
         this.title = title;
         this.coordsLng = coordsLng;
         this.coordsLat = coordsLat;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getContent() {

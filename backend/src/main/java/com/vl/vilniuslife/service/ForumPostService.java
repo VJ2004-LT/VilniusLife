@@ -6,6 +6,8 @@ import com.vl.vilniuslife.repository.ForumPostLikedUserRepository;
 import com.vl.vilniuslife.repository.ForumPostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +31,11 @@ public class ForumPostService {
     @Autowired
     private LocationsService locationsService;
 
-    public void forumPost(ForumPostRequest request) {
-        Locations location = locationsService.saveLocation("forumPost", request.getCoordsLng(), request.getCoordsLat());
-        Users user = usersService.getUser(request.getUserId());
+    public void forumPost(ForumPostRequest request, String email) {
+        Users user = usersService.getUserByEmail(email);
         if (user == null) return;
 
+        Locations location = locationsService.saveLocation("forumPost", request.getCoordsLng(), request.getCoordsLat());
         repository.save(new ForumPosts(
                             user,
                             location,

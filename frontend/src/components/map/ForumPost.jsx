@@ -27,7 +27,7 @@ function ForumPost({ onClose, coordsLat, coordsLng }) {
     }
     setLoading(true);
     setError(null);
-    const result = await makeForumPost(user.id, title, body, coordsLat, coordsLng);
+    const result = await makeForumPost(title, body, coordsLat, coordsLng);
     setLoading(false);
     if (result.error) {
       setError(result.error);

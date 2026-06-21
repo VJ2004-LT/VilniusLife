@@ -16,8 +16,8 @@ public class ForumPostController {
     private ForumPostService service;
 
     @PostMapping("/forumPost")
-    public void forumPost(@RequestBody ForumPostRequest forumPostRequest) {
-        service.forumPost(forumPostRequest);
+    public void forumPost(@RequestBody ForumPostRequest forumPostRequest, Principal principal) {
+        service.forumPost(forumPostRequest, principal.getName());
     }
 
     @GetMapping("/forumPosts")

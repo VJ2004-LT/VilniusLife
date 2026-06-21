@@ -6,6 +6,8 @@ import com.vl.vilniuslife.repository.ForumCommentLikedUserRepository;
 import com.vl.vilniuslife.repository.ForumCommentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +30,8 @@ public class ForumCommentService {
     @Autowired
     private UsersService usersService;
 
-    public void postForumComment(ForumCommentRequest request) {
-        Users user = usersService.getUser(request.getUserId());
+    public void postForumComment(ForumCommentRequest request, String email) {
+        Users user = usersService.getUserByEmail(email);
         if (user == null) return;
 
         ForumPosts forumPost = forumPostService.getForumPost(request.getForumPostId());
