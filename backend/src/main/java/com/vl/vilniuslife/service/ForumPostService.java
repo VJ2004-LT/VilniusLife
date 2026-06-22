@@ -1,17 +1,21 @@
 package com.vl.vilniuslife.service;
 
-import com.vl.vilniuslife.model.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.vl.vilniuslife.model.ForumPostDislikedUser;
+import com.vl.vilniuslife.model.ForumPostLikedUser;
+import com.vl.vilniuslife.model.ForumPostRequest;
+import com.vl.vilniuslife.model.ForumPostResponse;
+import com.vl.vilniuslife.model.ForumPosts;
+import com.vl.vilniuslife.model.Locations;
+import com.vl.vilniuslife.model.Users;
 import com.vl.vilniuslife.repository.ForumPostDislikedUserRepository;
 import com.vl.vilniuslife.repository.ForumPostLikedUserRepository;
 import com.vl.vilniuslife.repository.ForumPostsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ForumPostService {
