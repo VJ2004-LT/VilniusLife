@@ -9,7 +9,7 @@ const LANGUAGES = [
 
 const CLASSES = Array.from({ length: 12 }, (_, i) => i + 1);
 
-function SchoolSearch({ onClose, onSearch, schoolsLoading, schools }) {
+function SchoolSearch({ onClose, onSearch, schoolsLoading, schools, onButtonClick }) {
   const [languages, setLanguages] = useState([]);
   const [schoolClass, setSchoolClass] = useState(1);
 
@@ -47,7 +47,7 @@ function SchoolSearch({ onClose, onSearch, schoolsLoading, schools }) {
         </select>
       </div>
       <button
-        onClick={() => onSearch({ languages, schoolClass })}
+        onClick={() => { onSearch({ languages, schoolClass }); onButtonClick();}}
         disabled={schoolsLoading || schools.length >= 5}
         className="disabled:cursor-not-allowed w-full py-1 rounded bg-primary hover:bg-secondary text-white cursor-pointer"
       >

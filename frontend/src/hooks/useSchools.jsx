@@ -102,7 +102,7 @@ export function useSchools() {
 
   return {
     schools, schoolsLoading, schoolsError,
-    routeInfos, setRouteInfos,
+    routeInfos, setRouteInfos, clearSchoolsError: () => setSchoolsError(null),
     handleFindSchools, handleRemoveSchool, handleClearSchools, clearSchools, restoreSchools,
   };
 }

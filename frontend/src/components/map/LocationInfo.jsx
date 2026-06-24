@@ -9,7 +9,7 @@ import { formatAddress, formatNoise } from '../../utils/formatResponse';
 import { useAuth } from '../../context/AuthContext';
 
 function LocationInfo({ selected, noiseLevel, noiseLoading, safetyLevel, safetyLoading, address, onFindSchools,
-                        schoolsError, schoolsLoading, routeInfos, schools, onClearSchools,
+                        schoolsError, schoolsLoading, routeInfos, schools, onClearSchools, onClearSchoolsError,
                         onRemoveSchool, onSelect, onClearSelectedRoute, onFocus, onForumPostCreated
                      }) 
 {
@@ -24,12 +24,19 @@ function LocationInfo({ selected, noiseLevel, noiseLoading, safetyLevel, safetyL
   const [savedId, setSavedId] = useState(null);
   const [savedCount, setSavedCount] = useState(0);
   const [savedLocations, setSavedLocations] = useState([]);
+  const [ButtonClick,setButtonClick] = useState(0);
   const { user } = useAuth();
 
   useEffect(() => {
     setPostError(null);
     setLocationComparisonError(null);
   }, [address]);
+
+  useEffect(() => {
+    setPostError(null);
+    setLocationComparisonError(null);
+    onClearSchoolsError();
+  }, [ButtonClick]);
 
   useEffect(() => {
     getSavedLocations().then(locations => {
@@ -97,7 +104,7 @@ function LocationInfo({ selected, noiseLevel, noiseLoading, safetyLevel, safetyL
         <p>
           <span className="font-bold">Safety level:</span> {safetyLoading ? 'Loading...' : safetyLevel ?? 'Unavailable'}
           <button
-            onClick={() => setShowSafetyInfo(!showSafetyInfo)}
+            onClick={() => {setShowSafetyInfo(!showSafetyInfo); setButtonClick(c => c + 1);}}
           >
             ℹ️
           </button>
@@ -112,7 +119,7 @@ function LocationInfo({ selected, noiseLevel, noiseLoading, safetyLevel, safetyL
 
         {address !== null && !address.error && (
           <button
-            onClick={() => {
+            onClick={() =>{
               if (locationSaved) {
                 if (window.confirm('Are you sure you want to remove this location?')) {
                   handleSaveLocation();
@@ -143,6 +150,7 @@ function LocationInfo({ selected, noiseLevel, noiseLoading, safetyLevel, safetyL
               }
               setLocationComparisonError(null);
               setShowLocationComparison(true)
+              setButtonClick(c => c + 1);
             }}
             className="cursor-pointer mt-2 w-full py-1 rounded bg-primary text-white text-xs hover:bg-secondary"
           >
@@ -152,7 +160,7 @@ function LocationInfo({ selected, noiseLevel, noiseLoading, safetyLevel, safetyL
 
         {showSchoolSearch || address !== null && (
           <button
-            onClick={() => setShowSchoolSearch(true)}
+            onClick={() => { setShowSchoolSearch(true); setButtonClick(c => c + 1);}}
             className="cursor-pointer mt-2 w-full py-1 rounded bg-primary text-white text-xs hover:bg-secondary"
           >
             Find priority schools
@@ -168,6 +176,7 @@ function LocationInfo({ selected, noiseLevel, noiseLoading, safetyLevel, safetyL
               }
               setPostError(null);
               setShowForumPost(true)
+              setButtonClick(c => c + 1)
             }}
             className="cursor-pointer mt-2 w-full py-1 rounded bg-primary text-white text-xs hover:bg-secondary"
           >
@@ -187,6 +196,7 @@ function LocationInfo({ selected, noiseLevel, noiseLoading, safetyLevel, safetyL
             onSearch={(params) => {
               onFindSchools(params);
             }}
+            onButtonClick={() => setButtonClick(c => c + 1)}
           />
         )}
 

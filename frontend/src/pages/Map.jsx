@@ -62,7 +62,7 @@ function Map() {
   const { problems, problemsLoading, problemsError, forumPosts, forumPostsLoading, forumPostsError, refreshForumPosts } = useMapData();
   const {
     schools, schoolsLoading, schoolsError,
-    routeInfos, setRouteInfos,
+    routeInfos, setRouteInfos, clearSchoolsError,
     handleFindSchools, handleRemoveSchool, handleClearSchools, clearSchools,
     restoreSchools
   } = useSchools();
@@ -183,6 +183,7 @@ function toggleCategory(category) {
         address={address}
         onFindSchools={(params) => handleFindSchools(params, address)}
         schoolsError={schoolsError}
+        onClearSchoolsError={clearSchoolsError}
         schoolsLoading={schoolsLoading}
         onForumPostCreated={refreshForumPosts}
         schools={schools}
