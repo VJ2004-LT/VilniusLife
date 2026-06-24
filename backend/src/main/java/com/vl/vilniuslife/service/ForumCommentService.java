@@ -1,14 +1,21 @@
 package com.vl.vilniuslife.service;
 
-import com.vl.vilniuslife.model.*;
-import com.vl.vilniuslife.repository.ForumCommentDislikedUserRepository;
-import com.vl.vilniuslife.repository.ForumCommentLikedUserRepository;
-import com.vl.vilniuslife.repository.ForumCommentsRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.vl.vilniuslife.model.ForumCommentDislikedUser;
+import com.vl.vilniuslife.model.ForumCommentLikedUser;
+import com.vl.vilniuslife.model.ForumCommentRequest;
+import com.vl.vilniuslife.model.ForumCommentResponse;
+import com.vl.vilniuslife.model.ForumComments;
+import com.vl.vilniuslife.model.ForumPosts;
+import com.vl.vilniuslife.model.Users;
+import com.vl.vilniuslife.repository.ForumCommentDislikedUserRepository;
+import com.vl.vilniuslife.repository.ForumCommentLikedUserRepository;
+import com.vl.vilniuslife.repository.ForumCommentsRepository;
 
 @Service
 public class ForumCommentService {
@@ -28,8 +35,8 @@ public class ForumCommentService {
     @Autowired
     private UsersService usersService;
 
-    public void postForumComment(ForumCommentRequest request) {
-        Users user = usersService.getUser(request.getUserId());
+    public void postForumComment(ForumCommentRequest request, String email) {
+        Users user = usersService.getUserByEmail(email);
         if (user == null) return;
 
         ForumPosts forumPost = forumPostService.getForumPost(request.getForumPostId());

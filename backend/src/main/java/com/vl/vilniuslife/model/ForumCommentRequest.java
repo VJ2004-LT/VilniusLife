@@ -2,22 +2,12 @@ package com.vl.vilniuslife.model;
 
 public class ForumCommentRequest {
 
-    private Integer userId;
     private Integer forumPostId;
     private String content;
 
-    public ForumCommentRequest(Integer userId, Integer forumPostId, String content) {
-        this.userId = userId;
+    public ForumCommentRequest(Integer forumPostId, String content) {
         this.forumPostId = forumPostId;
         this.content = content;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public Integer getForumPostId() {

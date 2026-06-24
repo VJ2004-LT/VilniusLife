@@ -16,8 +16,8 @@ public class ForumCommentController {
     private ForumCommentService service;
 
     @PostMapping("/forumComment")
-    public void postForumComment(@RequestBody ForumCommentRequest request) {
-        service.postForumComment(request);
+    public void postForumComment(@RequestBody ForumCommentRequest request, Principal principal) {
+        service.postForumComment(request, principal.getName());
     }
 
     @GetMapping("/forumComments/{forumPostId}")

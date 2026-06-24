@@ -1,15 +1,21 @@
 package com.vl.vilniuslife.service;
 
-import com.vl.vilniuslife.model.*;
-import com.vl.vilniuslife.repository.ForumPostDislikedUserRepository;
-import com.vl.vilniuslife.repository.ForumPostLikedUserRepository;
-import com.vl.vilniuslife.repository.ForumPostsRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import com.vl.vilniuslife.model.ForumPostDislikedUser;
+import com.vl.vilniuslife.model.ForumPostLikedUser;
+import com.vl.vilniuslife.model.ForumPostRequest;
+import com.vl.vilniuslife.model.ForumPostResponse;
+import com.vl.vilniuslife.model.ForumPosts;
+import com.vl.vilniuslife.model.Locations;
+import com.vl.vilniuslife.model.Users;
+import com.vl.vilniuslife.repository.ForumPostDislikedUserRepository;
+import com.vl.vilniuslife.repository.ForumPostLikedUserRepository;
+import com.vl.vilniuslife.repository.ForumPostsRepository;
 
 @Service
 public class ForumPostService {
@@ -29,11 +35,11 @@ public class ForumPostService {
     @Autowired
     private LocationsService locationsService;
 
-    public void forumPost(ForumPostRequest request) {
-        Locations location = locationsService.saveLocation("forumPost", request.getCoordsLng(), request.getCoordsLat());
-        Users user = usersService.getUser(request.getUserId());
+    public void forumPost(ForumPostRequest request, String email) {
+        Users user = usersService.getUserByEmail(email);
         if (user == null) return;
 
+        Locations location = locationsService.saveLocation("forumPost", request.getCoordsLng(), request.getCoordsLat());
         repository.save(new ForumPosts(
                             user,
                             location,

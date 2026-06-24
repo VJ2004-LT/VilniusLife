@@ -24,7 +24,7 @@ function ForumComment({ onClose, coordsLat, coordsLng, postId }) {
 
     setLoading(true);
     setError(null);
-    const result = await makeForumComment(user.id, postId, body);
+    const result = await makeForumComment(postId, body);
     setLoading(false);
     if (result.error) {
       setError(result.error);

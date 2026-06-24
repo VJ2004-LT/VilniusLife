@@ -1,18 +1,20 @@
 package com.vl.vilniuslife.service;
 
-import com.vl.vilniuslife.model.FullProblem;
-import com.vl.vilniuslife.model.ProblemFile;
-import com.vl.vilniuslife.model.ShortProblem;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
-import tools.jackson.databind.JsonNode;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.StreamSupport;
+
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+
+import com.vl.vilniuslife.model.FullProblem;
+import com.vl.vilniuslife.model.ProblemFile;
+import com.vl.vilniuslife.model.ShortProblem;
+
+import tools.jackson.databind.JsonNode;
 
 @Service
 public class ProblemService {
